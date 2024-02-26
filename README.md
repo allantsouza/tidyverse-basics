@@ -27,5 +27,8 @@ This repository includes two primary files for the "Introduction to R tidyverse"
 
     - You can open the HTML file in any standard web browser to view the lecture. No additional software is required for viewing.
 
+## Zenodo integration
+[![DOI](https://zenodo.org/badge/763473663.svg)](https://zenodo.org/doi/10.5281/zenodo.10707327)
+
 ## License
 This project is licensed under a Creative Commons Attribution 4.0 International License [(CC-BY)](https://creativecommons.org/licenses/by/4.0/).
