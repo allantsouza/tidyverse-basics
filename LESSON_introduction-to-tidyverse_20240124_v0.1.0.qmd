@@ -1,0 +1,1282 @@
+---
+title: "Introduction to R tidyverse"
+subtitle: "ATMDP-007: Environmental Data Science"
+author: "Allan T. Souza"
+affiliation: "University of Helsinki"
+date: "2024-01-24"
+format: 
+  revealjs:
+    embed-resources: true
+    slide-number: true
+editor: visual
+---
+
+::: {style="font-size: 42px;"}
+::: columns
+::: {.column width="60%"}
+### Outline
+
+-   Introduction to R and its IDEs
+-   Overview of [`tidyverse`](https://www.tidyverse.org/)
+-   [`tidyverse`](https://www.tidyverse.org/) vs. [`base` R](https://www.r-project.org/)
+-   [`tidyverse`](https://www.tidyverse.org/) core packages
+    -   Introduction to [`tibble`](https://tibble.tidyverse.org/)
+    -   Introduction to [`dplyr`](https://dplyr.tidyverse.org/)
+    -   Introduction to [`tidyr`](https://tidyr.tidyverse.org/)
+-   Additional Learning Resources
+:::
+
+::: {.column width="40%"}
+::: {style="height: 125px;"}
+:::
+
+<!-- Adjust the height as needed -->
+
+![](images/outline.png){width="15cm"}
+:::
+:::
+:::
+
+::: {style="text-align: center;"}
+# R IDE
+:::
+
+## R IDE
+
+::: {style="font-size: 26px;"}
+-   What is an IDE?
+
+    -   An **Integrated Development Environment** (IDE) is a software application that provides comprehensive facilities to computer programmers for software development. It usually includes a code editor, debugger, and build automation tools.
+
+-   Which R IDE should I use?
+
+    -   The best IDE for R programming will depend on our specific needs, preferences, and the features we require. **There is no right choice**, but some IDEs are more popular than others among R users.
+:::
+
+::: {style="text-align: center;"}
+[![](images/rstudio_logo.png){fig-align="center" width="9.2cm"}](https://posit.co/download/rstudio-desktop/)[![](images/jupyter-logo.svg){width="5cm" height="3.2cm"}](https://jupyter.org/)[![](images/VS_logo.png){fig-align="center" width="3.3cm" height="3.2cm"}](https://code.visualstudio.com/)[![](images/logoESS.gif){width="3cm" height="3.2cm"}](https://ess.r-project.org/)[![](images/StatET_logo.png){width="4.1cm" height="3.2cm"}](https://projects.eclipse.org/projects/science.statet)[![](images/Sublime_Text_logo.png){width="3.3cm" height="3.2cm"}](https://www.sublimetext.com/)[![](images/RKWardlogo.png){width="2.8cm"}](https://rkward.kde.org/)[![](images/pycharm.png){width="9.8cm" height="3.2cm"}](https://www.jetbrains.com/pycharm/)
+:::
+
+## R IDE options
+
+::: {style="font-size: 24px;"}
+-   [**RStudio**]((https://www.rstudio.com/)): RStudio is widely recognized as the most popular IDE for R programming. It's a free, open-source IDE providing an extensive range of features like a code editor, debugger, console, and R Markdown support.
+
+-   [**Jupyter Notebook**](https://jupyter.org/): This web-based IDE is known for its data science and machine learning capabilities. It allows creating and sharing interactive documents with code, text, and visualizations.
+
+-   [**Visual Studio Code**](https://code.visualstudio.com/): A free and open-source editor, VS Code is a popular choice for R programming. It offers features like syntax highlighting, code completion, and debugging.
+
+-   [**ESS (Emacs Speaks Statistics)**](https://ess.r-project.org/): Combines the Emacs text editor with ESS package to provide R features like syntax highlighting and debugging.
+
+-   [**Eclipse StatET**](https://projects.eclipse.org/projects/science.statet): Integrates Eclipse IDE with the StatET plugin, offering features like a code editor and debugger for R programming.
+
+-   [**Sublime Text**](https://www.sublimetext.com/): A lightweight and robust code editor for R programming, offering features like syntax highlighting and code completion.
+
+-   [**RKWard**](https://rkward.kde.org/): A free and open-source IDE designed specifically for R, with a user-friendly interface and features like a code editor and debugger.
+
+-   [**PyCharm**](https://www.jetbrains.com/pycharm/): Known for Python programming, PyCharm also supports [R programming](https://www.jetbrains.com/help/pycharm/r-plugin-support.html), offering advanced features.
+:::
+
+::: {style="text-align: center;"}
+# [`tidyverse`](https://www.tidyverse.org/)
+:::
+
+## What is [`tidyverse`](https://www.tidyverse.org/)?
+
+The [`tidyverse`](https://www.tidyverse.org/) is a **collection of R packages** designed for **data science** that share an underlying design philosophy, grammar, and data structures. [`tidyverse`](https://www.tidyverse.org/) packages provide a cohesive and coherent toolkit for data manipulation, exploration, and visualization that is designed to make data science faster and easier.
+
+![](images/hex-tidyverse.png){fig-align="center" width="6cm"}
+
+::: {style="text-align: center;"}
+<https://www.tidyverse.org/>
+:::
+
+## Tidyverse core packages
+
+::: {style="font-size: 25.5px;"}
+-   [`ggplot2`](https://ggplot2.tidyverse.org/): For data visualization, using a layered grammar of graphics.
+
+-   [`dplyr`](https://dplyr.tidyverse.org/): For data manipulation, such as filtering rows, selecting columns, and summarizing data.
+
+-   [`tidyr`](https://tidyr.tidyverse.org/): For tidying data, changing the layout of datasets to a tidy format.
+
+-   [`readr`](https://readr.tidyverse.org/): For importing data, particularly from CSV and similar flat file formats.
+
+-   [`purrr`](https://purrr.tidyverse.org/): For functional programming, enabling operations on lists and vectors.
+
+-   [`tibble`](https://tibble.tidyverse.org/): For modern reimagining of data frames, keeping things simple and tidy.
+
+-   [`stringr`](https://stringr.tidyverse.org/): For string manipulation and regular expressions.
+
+-   [`forcats`](https://forcats.tidyverse.org/): For handling categorical variables (factors).
+
+    ![](images/ggplot2-logo.png){width="3cm" height="3.5cm"} ![](images/dplyr-logo.png){width="3cm" height="3.5cm"} ![](images/tidyr-logo.png){width="3cm" height="3.5cm"} ![](images/readr-logo.png){width="3cm" height="3.5cm"} ![](images/purrr-logo.png){width="3cm" height="3.5cm"} ![](images/tibble-logo.svg){.absolute top="540" left="85" width="3cm" height="4.7cm"} ![](images/stringr-logo.png){.absolute top="562.5" left="203.5" width="3cm" width="3cm" height="3.5cm"} ![](images/forcats-logo.png){.absolute top="562.5" left="323.5" width="3cm" height="3.5cm"}
+:::
+
+## Other tidyverse packages
+
+::: {style="font-size: 14px;"}
+-   Importing data
+    -   [RSQLite](https://rsqlite.r-dbi.org/): Facilitates interaction with SQLite databases directly from R.
+    -   [RMariaDB](https://rmariadb.r-dbi.org/): Provides an interface to MariaDB and MySQL databases in R.
+    -   [RPostgres](https://rpostgres.r-dbi.org/): Offers tools for communicating with PostgreSQL databases using R.
+    -   [odbc](https://github.com/r-dbi/odbc): Enables DBI-based access to databases through ODBC drivers in R.
+    -   [haven](https://haven.tidyverse.org/): Used for importing and exporting data between R and SAS, SPSS, and Stata file formats.
+    -   [httr2](https://httr2.r-lib.org/): Simplifies working with HTTP protocols to interact with web APIs in R.
+    -   [readxl](https://readxl.tidyverse.org/): Allows easy reading of Excel files (.xls and .xlsx) into R without external dependencies.
+    -   [googlesheets4](https://googlesheets4.tidyverse.org/): Provides an interface to Google Sheets, enabling the retrieval and modification of sheets data in R.
+    -   [googledrive](https://googledrive.tidyverse.org/): Designed to interact with Google Drive from R, allowing file management and access to Drive resources.
+    -   [rvest](https://rvest.tidyverse.org/): Aids in web scraping, making it easy to extract data from HTML web pages in R.
+    -   [jsonlite](https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html): A robust and fast JSON parser and generator that simplifies JSON data manipulation in R.
+    -   [xml2](https://xml2.r-lib.org/): Streamlines reading, writing, and parsing XML documents with R.
+-   Wrangling data
+    -   [lubridate](https://lubridate.tidyverse.org/): Simplifies working with dates and times in R, enhancing the datetime functionalities of base R.
+    -   [hms](https://hms.tidyverse.org/): Provides a simple class for storing and formatting time-of-day values, based on the difftime class.
+    -   [blob](https://blob.tidyverse.org/): Introduces a simple S3 class for representing binary large objects (BLOBs) or raw vectors in R.
+-   dplyr backends
+    -   [dbplyr](https://dbplyr.tidyverse.org/): A database backend for **`dplyr`**, allowing **`dplyr`** syntax to be used to manipulate data stored in a relational database, translating **`dplyr`** code into SQL.
+    -   [dtplyr](https://dtplyr.tidyverse.org/): Provides a **`data.table`** backend for **`dplyr`**, enabling the use of **`dplyr`** syntax while leveraging the speed and efficiency of **`data.table`** for large datasets.
+-   Programing
+    -   [magrittr](https://magrittr.tidyverse.org/): Introduces the pipe operator **`%>%`**, which allows for cleaner and more readable code by enabling the chaining of commands in a sequence of data operations.
+    -   [glue](https://glue.tidyverse.org/): Provides an easy-to-use interface for constructing strings with embedded expressions, using a syntax that is both concise and flexible, ideal for creating dynamic outputs and SQL queries.
+:::
+
+## Installing and using [`tidyverse`](https://www.tidyverse.org/)
+
+::: {style="font-size: 22px;"}
+#### Installing
+
+-   Installing [`tidyverse`](https://www.tidyverse.org/) is easy, we can do it directly from our console using the suit of packages stored on [CRAN](https://cran.r-project.org/web/packages/tidyverse/index.html).
+
+```{r}
+#| echo: true
+install.packages("tidyverse")
+```
+
+#### Using
+
+-   After we installed [`tidyverse`](https://www.tidyverse.org/) on our computer, we must load it.
+
+```{r message=TRUE}
+#| echo: true
+library("tidyverse")
+```
+
+-   Note that some conflicts with other packages might emerge (this is not due to [`tidyverse`](https://www.tidyverse.org/), but rather a particularity of R).
+
+    -   This happens because there are more than one function with the same name loaded in our R environment.
+
+    -   One way around this is to use the name of the package before the function separated by `::`
+
+        -   [`dplyr::filter()`](https://dplyr.tidyverse.org/reference/filter.html) instead of [`filter()`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/filter).
+        -   This way we specify the package that the function belongs to.
+:::
+
+## Advantages of [`tidyverse`](https://www.tidyverse.org/)
+
+::: {style="font-size: 24px;"}
+-   [`tidyverse`](https://www.tidyverse.org/) offers a significant advantage over [`base` R](https://www.r-project.org/) primarily through its consistent and **user-friendly syntax**, making data manipulation and analysis **more intuitive and accessible, especially for beginners**.
+
+-   Its collection of **packages are designed to work together seamlessly**, streamlining workflows in data science.
+
+-   This integration **reduces the learning curve and enhances productivity**, allowing for **more readable and maintainable code**.
+
+-   [`tidyverse`](https://www.tidyverse.org/)'s emphasis on **tidy data principles** aids in creating **more organized and understandable data structures**, facilitating easier data analysis and visualization.
+:::
+
+![](images/hex-tidyverse.png){fig-align="center" width="6cm"}
+
+::: {style="text-align: center;"}
+# (Tidy data)
+
+[*small parenthesis*]{style="font-family: 'Cookie', cursive; color: green;"}
+:::
+
+## Tidy data
+
+Tidy data is a concept and format in data preparation that simplifies data analysis in statistics and data science. It adheres to three main principles.
+
+![](images/tidydata_1.jpg){fig-align="center" width="8cm"}
+
+## Tidy data
+
+::: {style="font-size: 22px;"}
+::: columns
+::: {.column width="50%"}
+### Tidy data
+
+| **Sample ID** | **Treatment** | **Soil Temperature** |
+|---------------|---------------|----------------------|
+| HYY-C-2024-01 | Control       | 2                    |
+| HYY-C-2024-02 | Control       | 3                    |
+| HYY-C-2024-03 | Drought       | 6                    |
+| HYY-C-2024-04 | Drought       | 7                    |
+
+-   Each row represents an observation (Soil temperature from each Sample ID for each treatment).
+-   Each column represents a variable (Sample ID, Treatment, Soil temperature).
+
+::: {style="text-align: center; position: absolute; bottom: 0;"}
+![](images/good.png){width="4cm"}
+:::
+:::
+
+::: {.column width="50%"}
+### **Non-tidy** data
+
+| **Sample ID** | **Control** | **Drought** |
+|---------------|-------------|-------------|
+| HYY-C-2024-01 | 2           | NA          |
+| HYY-C-2024-02 | 3           | NA          |
+| HYY-C-2024-03 | NA          | 6           |
+| HYY-C-2024-04 | NA          | 7           |
+
+-   Treatment are spread across multiple columns.
+-   The table mixes the variables of treatment type and soil temperature in the same row.
+
+::: {style="text-align: center; position: absolute; bottom: 0;"}
+![](images/bad.png){width="4cm"}
+:::
+:::
+:::
+:::
+
+::: {style="text-align: center;"}
+# [`tidyverse`](https://www.tidyverse.org/) syntax
+:::
+
+## [`tidyverse`](https://www.tidyverse.org/) syntax
+
+::: {style="font-size: 30px;"}
+-   The [`magrittr`](https://magrittr.tidyverse.org/) package and its **pipe operator** [`%>%`](https://magrittr.tidyverse.org/reference/pipe.html) play a crucial role in the [`tidyverse`](https://www.tidyverse.org/) syntax by enabling a **more intuitive and readable flow** of data manipulation steps.
+
+-   This operator allows for **chaining together functions in a sequence, transforming the data step-by-step**.
+
+-   This approach not only **enhances readability** but also **simplifies the process of writing and understanding complex data transformations**.
+
+::: {style="text-align: center;"}
+![](images/magrittr.png){width="5.0cm"}
+:::
+:::
+
+## [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html)
+
+::: {style="font-size: 28px;"}
+### **1. Enhanced Readability and Clarity:**
+
+-   **Sequential Operations**: The [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html) allows for a sequence of operations to be chained together. This leads to code that reads more like a series of steps, which aligns closely with the way we logically think about data processing tasks.
+
+-   **Reduction in Nesting**: Without the [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html), functions are nested inside each other, which can make code **difficult to read and understand**. The [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html) reduces this nesting, making the **code cleaner and more straightforward**.
+
+### **2. Easier Debugging and Maintenance:**
+
+-   **Modifying Code**: When using the [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html), it's easier to add, remove, or change steps in our data processing pipeline. This flexibility makes debugging and maintaining code simpler.
+
+-   **Troubleshooting**: We can insert a breakpoint or a diagnostic function at any point in the pipeline to inspect intermediate results, which helps in troubleshooting.
+:::
+
+## [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html)
+
+::: {style="font-size: 28px;"}
+### **3. Encouraging Good Programming Practices:**
+
+-   **Modular Approach**: The [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html) encourages a modular approach to code writing. Each step in the pipeline does one thing, which is a good programming practice. This modularity also makes the code more reusable.
+
+-   **Focus on Data Flow**: The [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html) emphasizes the flow of data through a series of transformations, which aligns well with many data analysis tasks.
+
+### **4. Synergy with Tidyverse Philosophy:**
+
+-   **Consistency with Tidyverse**: The [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html) is part of the [`tidyverse`](http://www.tidyverse.org/)'s coherent and consistent approach to data science. It works seamlessly with other [`tidyverse`](http://www.tidyverse.org/) packages (like [**`dplyr`**](https://dplyr.tidyverse.org/), [**`tidyr`**](http://tidyr.tidyverse.org/) ), which are designed to work with pipe-friendly syntax.
+
+-   **Functional Style**: The [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html) supports a more functional style of programming, where the focus is on the transformation of data rather than the manipulation of state.
+:::
+
+## [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html)
+
+::: {style="font-size: 28px;"}
+**5. Improved Learning curve for beginners**:
+
+-   **Intuitive for New Users**: For those new to R, the [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html) can make learning easier. The clear, step-by-step nature of piped commands is often more intuitive than nested function calls.
+
+-   **Alignment with Natural Language**: The [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html)'s syntax is somewhat analogous to natural language ("Take this data, then do this, then do that"), which can be easier for beginners to grasp.
+:::
+
+![](images/datapipe.png){fig-align="center" width="6cm"}
+
+## [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html)
+
+### Basic piping
+
+-   `x %>% f` is equivalent to `f(x)`
+
+-   `x %>% f(y)` is equivalent to `f(x, y)`
+
+-   `x %>% f %>% g %>% h` is equivalent to `h(g(f(x)))`
+
+![](images/datapipe2.png){fig-align="center" width="24.5cm"}
+
+## [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html)
+
+### Example of usage
+
+::: {style="font-size: 28px; "}
+-   Loading [`tidyverse`](https://www.tidyverse.org/)
+
+```{r message=FALSE}
+#| echo: true
+
+# loading tidyverse
+library(tidyverse)
+
+```
+:::
+
+::: {style="font-size: 28px; "}
+-   Checking the default dataset
+
+```{r message=TRUE}
+#| echo: true
+
+# default dataset preloaded with tidyverse: starwars
+starwars
+
+```
+:::
+
+## [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html)
+
+### Example of usage
+
+::: {style="font-size: 24px; "}
+-   Let's take a look at the dataset.
+    -   [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) is a function from [`dplyr`](http://dplyr.tidyverse.org/) package and is like a transposed version of [`print()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/print).
+    -   The data object (`starwars`) precedes the operation ([`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html)), and it is connected through [`%>%`](https://magrittr.tidyverse.org/reference/pipe.html).
+
+```{r message=TRUE}
+#| echo: true
+
+# taking a look at the dataset
+starwars %>%
+  glimpse()
+```
+:::
+
+## [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html)
+
+### Example of usage
+
+::: {style="font-size: 26px;"}
+-   We obtain the same result if we do not use the [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html).
+-   The function ([`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html)) comes first, and the data object (`starwars`) is nested in it.
+
+```{r message=TRUE}
+#| echo: true
+
+# taking a look at the dataset
+glimpse(starwars)
+```
+:::
+
+## [pipe operator](https://magrittr.tidyverse.org/reference/pipe.html)
+
+-   Useful tip
+
+    -   We can type the [pipe operator (`%>%`)](https://magrittr.tidyverse.org/reference/pipe.html) quickly by using the shortcut:
+
+        -   *`ctrl`* + *`shift`* + *`m`*
+
+![](images/tip.png){fig-align="center" width="14cm"}
+
+# [`tidyverse`](http://www.tidyverse.org/) core packages
+
+::: {style="text-align: center;"}
+[![](images/ggplot2-logo.png){width="3cm" height="3.5cm"}](http://ggplot2.tidyverse.org/) [![](images/dplyr-logo.png){width="3cm" height="3.5cm"}](http://dplyr.tidyverse.org/) [![](images/tidyr-logo.png){width="3cm" height="3.5cm"}](http://tidyr.tidyverse.org/) [![](images/readr-logo.png){width="3cm" height="3.5cm"}](http://readr.tidyverse.org/) [![](images/purrr-logo.png){width="3cm" height="3.5cm"}](http://purrr.tidyverse.org/) [![](images/tibble2.jpeg){height="3.5cm"}](http://tibble.tidyverse.org/) [![](images/stringr-logo.png){width="3cm" width="3cm" height="3.5cm"}](http://stringr.tidyverse.org/) [![](images/forcats-logo.png){width="3cm" height="3.5cm"}](http://forcats.tidyverse.org/)
+:::
+
+## [`tidyverse`](http://www.tidyverse.org/) core packages
+
+::: {style="text-align: center;"}
+[![](images/tibble2.jpeg){width="7.3cm"}](http://tibble.tidyverse.org/) [![](images/dplyr-logo.png){width="7.4cm"}](http://dplyr.tidyverse.org/) [![](images/tidyr-logo.png){width="7.4cm"}](http://tidyr.tidyverse.org/)
+
+#### [*Basic*]{style="color: red;"} *core packages*
+:::
+
+## [Basic]{style="color: red;"} core packages
+
+::: {style="font-size: 22px;"}
+-   **Foundation for data science**
+
+    -   [**`tibble`**](http://tibble.tidyverse.org/): **modern take on data frames**, ensuring ease of use and compatibility with the `tidyverse` ecosystem.
+
+    -   [**`dplyr`**](http://dplyr.tidyverse.org/): **key for data manipulation tasks**, offering intuitive functions for filtering, sorting, and summarizing data efficiently.
+
+    -   [**`tidyr`**](http://tidyr.tidyverse.org/): **essential for data tidying**, transforming datasets into a structured, readable format.
+
+-   **Why start with these?**
+
+    -   **Practical relevance**: these packages address the most common data processing tasks - **organizing, transforming, and summarizing data**.
+
+    -   **Ease to learn**: mastering these packages provides a **strong foundation**, making it easier to understand and utilize other [`tidyverse`](http://www.tidyverse.org/) packages.
+
+    -   **Immediate application**: skills in [`tibble`](http://tibble.tidyverse.org/), [`dplyr`](http://dplyr.tidyverse.org/), and [`tidyr`](http://tidyr.tidyverse.org/) are **immediately applicable** in a wide range of data processing and analysis scenarios.
+
+-   **Building a Strong Base**
+
+    -   **Focusing on these packages first** provides understanding of **essential tools** needed for most data processing tasks.
+
+    -   Encourages a smoother transition to more complex aspects of data analysis in the [`tidyverse`](http://www.tidyverse.org/).
+:::
+
+::: {style="text-align: center;"}
+# [`tibble`](http://tibble.tidyverse.org/)
+
+![](images/tibble-logo.svg){width="1cm"}
+:::
+
+## [`tibble`](http://tibble.tidyverse.org/)
+
+::: {style="font-size: 22px;"}
+![](images/tibble-logo.svg){.absolute top="-20" left="250" width="2cm"}
+
+-   **Why [`tibble`](http://tibble.tidyverse.org/)?**
+
+    -   **Enhanced Data Frames**: tibbles are an evolution of the traditional data frame in R, offering a more modern, tidyverse-compatible structure.
+
+    -   **User-Friendly**: easier to use and understand, especially for those new to R.
+
+-   [**`tibble`**](http://tibble.tidyverse.org/) **vs. data.frame**:
+
+    -   **Printing**: [`tibble`](http://tibble.tidyverse.org/) print a small subset of data, making them more manageable with large datasets.
+
+    -   **Data type preservation**: unlike data frames, [`tibble`](http://tibble.tidyverse.org/) do not convert character vectors to factors by default.
+
+    -   **Subsetting behavior**: [`tibble`](http://tibble.tidyverse.org/) is more consistent in returning [`tibble`](http://tibble.tidyverse.org/) structures, whereas `data.frame` can change structure based on the subset.
+
+    -   **Row names**: [`tibble`](http://tibble.tidyverse.org/) do not use row names, which simplifies their structure and avoids some common data manipulation errors.
+
+    -   **Column subsetting**: [`tibble`](http://tibble.tidyverse.org/) is more predictable with column subsetting, always returning a [`tibble`](http://tibble.tidyverse.org/) even with a single column, unlike data frames which might return a vector.
+
+    -   **Non-syntactic names**: [`tibble`](http://tibble.tidyverse.org/) allows columns to have non-syntactic names without requiring backticks, making them flexible with data from diverse sources.
+:::
+
+## [`tibble`](https://tibble.tidyverse.org/index.html)
+
+![](images/tibble-logo.svg){.absolute top="-20" left="250" width="2cm"}
+
+::: {style="font-size: 38px;"}
+**A few relevant [`tibble`](https://tibble.tidyverse.org/index.html) functions**
+
+-   [**`as_tibble()`**](https://tibble.tidyverse.org/reference/as_tibble.html): Converts existing data structures into tibbles.
+
+-   [**`tibble()`**](https://tibble.tidyverse.org/reference/tibble.html): Creates tibble data frames directly.
+
+-   [**`tribble()`**](https://tibble.tidyverse.org/reference/tribble.html): Allows for easy creation of tibbles with a readable layout.
+
+-   [**`add_row()`**](https://tibble.tidyverse.org/reference/add_row.html?q=add_row#null): Adds rows to an existing tibble.
+
+-   [**`add_column()`**](https://tibble.tidyverse.org/reference/add_column.html): Adds columns to an existing tibble.
+:::
+
+::: {style="font-size: 22px;"}
+*Note that there are more functions in [`tibble`](https://tibble.tidyverse.org/index.html) package that might be relevant to our interests.*
+:::
+
+## [`tibble`](https://tibble.tidyverse.org/index.html)
+
+![](images/tibble-logo.svg){.absolute top="-20" left="250" width="2cm"}
+
+::: {style="font-size: 30px;"}
+Using the [pipe operator (`%>%`)](https://magrittr.tidyverse.org/reference/pipe.html) to connect processing steps, we can transform a dataset into [`tibble`](https://tibble.tidyverse.org/reference/tibble.html), and add a new row in one go.
+
+```{r}
+#| echo: true
+library(tidyverse)
+# Convert iris to a tibble and add a new row using pipe operator
+iris %>% # this is a classic default dataset in R 
+  as_tibble() %>% # transforming the data.frame to tibble
+  add_row(Sepal.Length = 5.5, 
+          Sepal.Width = 3, 
+          Petal.Length = 1.2, 
+          Petal.Width = 0.1, 
+          Species = "cherry") %>% # adding a new row in the dataset
+  tail() # to check the row added
+```
+:::
+
+## [*`tibble`*](https://tibble.tidyverse.org/index.html)
+
+![](images/R.png){.absolute top="-18" left="250" width="5.5cm"}
+
+::: {style="font-size: 30px;"}
+Otherwise we could use the [R `base`](https://www.r-project.org/) functions to do the same job.
+
+```{r}
+#| echo: true
+# Convert iris to a data frame (it's already a data frame, so this step is more about clarity)
+iris_df <- data.frame(iris)
+
+# Extend the levels of the Species factor to include "cherry"
+iris_df$Species <- factor(iris_df$Species, levels = c(levels(iris_df$Species), "cherry"))
+
+# Adding a new row to the data frame
+new_row <- data.frame(Sepal.Length = 5.5, 
+                      Sepal.Width = 3, 
+                      Petal.Length = 1.2, 
+                      Petal.Width = 0.1, 
+                      Species = "cherry")
+iris_df <- rbind(iris_df, new_row)
+
+# Display the last few rows of the data frame to check the row added
+tail(iris_df)
+```
+
+Note that the the code is **more complex** (e.g. adding the level in *Species*) and the output does not show the data classes (e.g. `dbl`, `chr`, `fct`).
+:::
+
+## [`tibble`](https://tibble.tidyverse.org/index.html)
+
+![](images/tibble-logo.svg){.absolute top="-20" left="250" width="2cm"}
+
+::: {style="font-size: 30px;"}
+-   Creating a tibble from the scratch using [`tribble()`](https://tibble.tidyverse.org/reference/tribble.html)
+
+    -   easy step-by-step dataset building
+
+    -   entries are row by row oriented
+
+    -   good for small datasets
+
+    -   columns are identified by `~` and separated by `,`
+
+```{r}
+#| echo: true
+
+library(tibble)
+# Creating a tribble
+felines <- tribble(
+  ~species, ~weight, ~length,
+  "lion",   190,     2.4,
+  "tiger",  220,     2.5,
+  "jaguar", 100,     2.0
+)
+
+felines
+```
+:::
+
+## [*`tibble`*](https://tibble.tidyverse.org/index.html)
+
+![](images/R.png){.absolute top="-18" left="250" width="5.5cm"}
+
+::: {style="font-size: 30px;"}
+-   Creating a data.frame from the scratch using [`base` R](https://www.r-project.org/).
+
+    -   the information is not row by row oriented
+
+    -   not easy to follow in slightly larger datasets
+
+```{r}
+#| echo: true
+
+# Creating a data frame in base R
+felines <- data.frame(
+  species = c("lion", "tiger", "jaguar"),
+  weight = c(190, 220, 100),
+  length = c(2.4, 2.5, 2.0)
+)
+
+felines
+
+```
+:::
+
+## [`tibble`](https://tibble.tidyverse.org/index.html)
+
+![](images/tibble-logo.svg){.absolute top="-20" left="250" width="2cm"}
+
+::: {style="font-size: 28px;"}
+-   Adding rows and columns in a [`tibble()`](https://tibble.tidyverse.org/reference/tibble.html)
+
+    -   [`add_row()`](https://tibble.tidyverse.org/reference/add_row.html): adds rows to the dataset
+
+    -   [`add_column()`](https://tibble.tidyverse.org/reference/add_column.html): adds columns to the dataset
+
+```{r}
+#| echo: true
+
+library(tibble)
+felines <- tribble(
+  ~species, ~weight, ~length,
+  "lion",   190,     2.4,
+  "tiger",  220,     2.5,
+  "jaguar", 100,     2.0
+)
+
+felines %>%
+  add_row(species = "leopard", # Adding a row for the leopard
+          weight = 90, 
+          length = 2.1) %>% 
+  add_column(scientific_name = c("Panthera leo", "Panthera tigris", "Panthera onca", "Panthera pardus"), # Adding a column for the scientific name
+             .after = "species") #specifying where the new column will be added
+```
+:::
+
+## [*`tibble`*](https://tibble.tidyverse.org/index.html)
+
+![](images/R.png){.absolute top="-18" left="250" width="5.5cm"}
+
+::: {style="font-size: 28px;"}
+-   Adding rows and columns in a using [`base` R](https://www.r-project.org/).
+    -   **More complex** code and **less intuitive** workflow.
+
+```{r}
+#| echo: true
+
+# Creating a data.frame
+felines <- data.frame(species = c("lion", "tiger", "jaguar"),
+                      weight = c(190, 220, 100),
+                      length = c(2.4, 2.5, 2.0))
+
+# Adding a row for the leopard
+felines <- rbind(felines, c("leopard", 90, 2.1))
+
+# Adding a column for the scientific name
+felines$scientific_name <- c("Panthera leo", "Panthera tigris", "Panthera onca", "Panthera pardus")
+
+# Reordering columns to place scientific_name after species
+felines <- felines[c("species", "scientific_name", "weight", "length")]
+
+felines
+```
+:::
+
+::: {style="text-align: center;"}
+# [`dplyr`](https://dplyr.tidyverse.org/)
+
+![](images/dplyr-logo.png){width="1cm"}
+:::
+
+## [`dplyr`](https://dplyr.tidyverse.org/)
+
+![](images/dplyr-logo.png){.absolute top="-20" left="250" width="2cm"}
+
+::: {style="font-size: 20px;"}
+-   [`dplyr`](http://dplyr.tidyverse.org/) empowers users to efficiently handle and transform data, making it a **vital tool** for any R data processing and manipulation task.
+
+-   Probably the **most used**, and maybe **important**, of all [`tidyverse`](http://www.tidyverse.org/) core packages.
+
+    -   **Some relevant [`dplyr`](http://dplyr.tidyverse.org/) functions**:
+
+        -   [**`filter()`**](https://dplyr.tidyverse.org/reference/filter.html): Extracts rows based on specified conditions.
+
+        -   [**`select()`**](https://dplyr.tidyverse.org/reference/select.html): Chooses columns, simplifying dataset structure.
+
+        -   [**`rename()`**](https://dplyr.tidyverse.org/reference/rename.html): Changes the names of individual variables.
+
+        -   [**`mutate()`**](https://dplyr.tidyverse.org/reference/mutate.html): Creates or transforms variables, enhancing data with new insights.
+
+        -   [**`group_by()`**](https://dplyr.tidyverse.org/reference/group_by.html): Facilitates grouped calculations, enhancing data analysis scope.
+
+        -   [**`summarise()`**](https://dplyr.tidyverse.org/reference/summarise.html): Aggregates data, ideal for generating summaries.
+
+        -   [**`*_join()`**](https://dplyr.tidyverse.org/reference/mutate-joins.html): Merges two datasets based on a common key. It is actually used as `full_join`, `inner_join()`, `left_join()` and `right_join()`.
+
+        -   [**`arrange()`**](https://dplyr.tidyverse.org/reference/arrange.html): Orders rows by variable values.
+
+        -   [**`distinct()`**](https://dplyr.tidyverse.org/reference/distinct.html): Keep only unique/distinct rows from a data frame.
+
+        -   [**`relocate()`**](https://dplyr.tidyverse.org/reference/relocate.html): Change the order of the columns in the dataset.
+
+        -   [**`if_else()`**](https://dplyr.tidyverse.org/reference/if_else.html): A vectorized if-else function. Similar to, but more rigorous than, [`ifelse()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/ifelse).
+
+        -   [**`case_when()`**](https://dplyr.tidyverse.org/reference/case_when.html): A vectorized set of if-else statements.
+
+*\*Note that other functions from [`dplyr`](http://dplyr.tidyverse.org/) might be more relevant depending on our specific needs.*
+:::
+
+## [`dplyr`](https://dplyr.tidyverse.org/)
+
+![](images/dplyr-logo.png){.absolute top="-20" left="250" width="2cm"}
+
+::: {style="font-size: 28px;"}
+With [`dplyr`](https://dplyr.tidyverse.org/) is possible to make a series of data processing without the need to ave a new object in R. Each step is integrated with the [pipe operator `%>%`](https://magrittr.tidyverse.org/reference/pipe.html) and the code is easily comprehended.
+
+```{r}
+#| echo: true
+
+library(tidyverse)
+
+# Using the storms dataset
+storms %>%
+  filter(year >= 2020) %>% # Keep only storms from 2020 onwards
+  select(name, year, status, wind) %>% # Choose specific columns
+  group_by(name, year) %>% # Grouping by name and year
+  summarise(average_wind = mean(wind, na.rm = TRUE), .groups = "drop") %>% # calculating the average wind speed 
+  rename(average_wind_speed = average_wind) %>% # Change 'average_wind' to 'average_wind_speed'
+  arrange(desc(average_wind_speed)) %>% # Order by wind speed in descending order
+  relocate(year, .before = name) # Move 'year' column right before 'name'
+
+```
+:::
+
+## [*`dplyr`*](https://dplyr.tidyverse.org/index.html)
+
+![](images/R.png){.absolute top="-18" left="250" width="5.5cm"}
+
+::: {style="font-size: 24px;"}
+It is also possible to **achieve the same result using [`base` R](https://www.r-project.org/) syntax and functions**. However the **code is a bit less clear** and it required the **saving of different objects** on the R environment.
+
+```{r}
+#| echo: true
+
+library(tidyverse) # to access the storms dataset
+
+# Filtering storms from 2020 onwards and selecting specific columns
+storms_filtered <- subset(storms, year >= 2020, select = c(name, year, status, wind))
+
+# Grouping by name and year, and calculating the average wind speed
+storms_aggregated <- aggregate(wind ~ name + year, data = storms_filtered, 
+                               FUN = function(x) mean(x, na.rm = TRUE))
+
+# Renaming 'wind' to 'average_wind_speed'
+names(storms_aggregated)[which(names(storms_aggregated) == "wind")] <- "average_wind_speed"
+
+# Ordering by average wind speed in descending order
+storms_ordered <- storms_aggregated[order(-storms_aggregated$average_wind_speed), ]
+
+# Moving 'year' column right before 'name'
+storms_ordered <- storms_ordered[c("year", "name", "average_wind_speed")]
+
+# View the final result
+storms_ordered
+
+```
+:::
+
+## [`dplyr`](https://dplyr.tidyverse.org/)
+
+![](images/dplyr-logo.png){.absolute top="-20" left="250" width="2cm"}
+
+::: {style="font-size: 24px;"}
+This code provides some more examples of how the [`dplyr`](https://dplyr.tidyverse.org/) functions can be used to perform advanced data processing, highlighting the package's strengths in data manipulation.
+
+```{r}
+#| echo: true
+
+library(tidyverse)
+
+storms %>%
+  mutate(wind_category = case_when( # Create a new column 'wind_category' based on wind speed using case_when
+    wind < 74 ~ "Not a hurricane",
+    wind >= 74 & wind < 96 ~ "Category 1",
+    wind >= 96 & wind < 111 ~ "Category 2",
+    wind >= 111 & wind < 130 ~ "Category 3",
+    wind >= 130 & wind < 157 ~ "Category 4",
+    TRUE ~ "Category 5"
+  )) %>%
+  mutate(major_hurricane = if_else(condition = wind_category %in% c("Category 3", "Category 4", "Category 5"), 
+                                   true = "Yes", false = "No")) %>% # Create a new column 'major_hurricane' using if_else to identify major hurricanes (Category 3 and above)
+  filter(major_hurricane == "Yes") %>% # Filter to keep only rows where 'major_hurricane' is "Yes"
+  distinct(name, year, major_hurricane) %>% # Keep only distinct rows based on 'name', 'year', and 'major_hurricane'
+  count(year, major_hurricane, sort = TRUE, name = "major_hurricane_per_year") %>% # Count the number of major hurricanes per year and sort the result
+  select(-major_hurricane) # Remove the 'major_hurricane' column from the final result
+
+
+```
+:::
+
+## [*`dplyr`*](https://dplyr.tidyverse.org/index.html)
+
+![](images/R.png){.absolute top="-18" left="250" width="5.5cm"}
+
+::: {style="font-size: 24px;"}
+Again, it is possible to achieve the same end goal using [`base` R](https://www.r-project.org/) and [`stats`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/) functions, but the code is not so straightforward, and save **intermediate data objects** in R environment.
+
+```{r}
+#| echo: true
+
+library(tidyverse) # to have access to the storms dataset
+
+# Create a new column 'wind_category' based on wind speed
+storms$wind_category <- with(storms, ifelse(wind < 74, "Not a hurricane",
+                           ifelse(wind < 96, "Category 1",
+                           ifelse(wind < 111, "Category 2",
+                           ifelse(wind < 130, "Category 3",
+                           ifelse(wind < 157, "Category 4", "Category 5"))))))
+
+# Create a new column 'major_hurricane' to identify major hurricanes
+storms$major_hurricane <- ifelse(test = storms$wind_category %in% c("Category 3", "Category 4", "Category 5"),
+                                yes = "Yes", no = "No")
+
+storms_unique <- storms[!duplicated(storms[c("name", "year", "major_hurricane")]), ] # Keep only distinct rows based on 'name', 'year', and 'major_hurricane'
+
+major_hurricanes <- storms_unique[storms_unique$major_hurricane == "Yes", ] # Filter to keep only major hurricanes
+
+major_hurricane_count <- aggregate(cbind(major_hurricane_per_year = major_hurricanes$wind) ~ year, # Count the number of major hurricanes per year
+                                   data = major_hurricanes, FUN = length)
+
+major_hurricane_count <- major_hurricane_count[order(-major_hurricane_count$major_hurricane_per_year), ] # Sorting by count in descending order
+
+head(major_hurricane_count) # View the result
+
+```
+:::
+
+## [`dplyr`](https://dplyr.tidyverse.org/)
+
+![](images/dplyr-logo.png){.absolute top="-20" left="250" width="2cm"}
+
+::: {style="font-size: 16px;"}
+-   Joining datasets using [`dplyr`](https://dplyr.tidyverse.org/):
+    -   Firstly we create a new dataset using [`tribble()`](https://tibble.tidyverse.org/reference/tribble.html).
+
+    -   Then we join them using different versions of the [`*_join()`](https://dplyr.tidyverse.org/reference/mutate-joins.html) function from [`dplyr`](https://dplyr.tidyverse.org/index.html).
+
+```{r}
+#| echo: true
+
+library(tidyverse)
+
+# Create a small custom dataset using tribble
+storm_categories <- tribble(
+  ~category,      ~description,
+  "Category 1",   "Very dangerous winds",
+  "Category 2",   "Extremely dangerous winds",
+  "Category 3",   "Devastating damage",
+  "Category 4",   "Catastrophic damage",
+  "Category 5",   "High chance of being deadly")
+
+storms <- storms %>% # Add a wind category to the storms dataset for joining
+  mutate(wind_category = case_when(
+    wind < 74 ~ "Not a hurricane",
+    wind >= 74 & wind < 96 ~ "Category 1",
+    wind >= 96 & wind < 111 ~ "Category 2",
+    wind >= 111 & wind < 130 ~ "Category 3",
+    wind >= 130 & wind < 157 ~ "Category 4",
+    TRUE ~ "Category 5"))
+```
+
+#### Full Join: Include all rows from both datasets
+
+```{r}
+#| echo: true
+
+full_join_result <- full_join(storms, storm_categories, by = c("wind_category" = "category"))
+full_join_result %>% 
+  select(name, year, wind_category, description) %>% 
+  slice(1:3)
+```
+
+#### Inner Join: Include only rows with matching categories
+
+```{r}
+#| echo: true
+
+inner_join_result <- inner_join(storms, storm_categories, by = c("wind_category" = "category"))
+inner_join_result %>% 
+  select(name, year, wind_category, description) %>% 
+  slice(1:3)
+```
+:::
+
+## [`dplyr`](https://dplyr.tidyverse.org/)
+
+![](images/dplyr-logo.png){.absolute top="-20" left="250" width="2cm"}
+
+::: {style="font-size: 16px;"}
+-   Joining datasets using [`dplyr`](https://dplyr.tidyverse.org/):
+    -   Firstly we create a new dataset using [`tribble()`](https://tibble.tidyverse.org/reference/tribble.html).
+
+    -   Then we join them using different versions of the [`*_join()`](https://dplyr.tidyverse.org/reference/mutate-joins.html) function from [`dplyr`](https://dplyr.tidyverse.org/index.html).
+
+```{r}
+#| echo: true
+
+library(tidyverse)
+
+# Create a small custom dataset using tribble
+storm_categories <- tribble(
+  ~category,      ~description,
+  "Category 1",   "Very dangerous winds",
+  "Category 2",   "Extremely dangerous winds",
+  "Category 3",   "Devastating damage",
+  "Category 4",   "Catastrophic damage",
+  "Category 5",   "High chance of being deadly")
+
+storms <- storms %>% # Add a wind category to the storms dataset for joining
+  mutate(wind_category = case_when(
+    wind < 74 ~ "Not a hurricane",
+    wind >= 74 & wind < 96 ~ "Category 1",
+    wind >= 96 & wind < 111 ~ "Category 2",
+    wind >= 111 & wind < 130 ~ "Category 3",
+    wind >= 130 & wind < 157 ~ "Category 4",
+    TRUE ~ "Category 5"))
+```
+
+#### Right Join: Include all rows from storm_categories and only matching rows from storms
+
+```{r}
+#| echo: true
+
+right_join_result <- right_join(storms, storm_categories, by = c("wind_category" = "category")) 
+right_join_result %>% 
+  select(name, year, wind_category, description) %>% 
+  slice(1:3)
+```
+
+#### Left Join: Include all rows from storms and only matching rows from storm_categories
+
+```{r}
+#| echo: true
+
+left_join_result <- left_join(storms, storm_categories, by = c("wind_category" = "category"))
+left_join_result %>% 
+  select(name, year, wind_category, description) %>% 
+  slice(1:3)
+```
+:::
+
+## [*`dplyr`*](https://dplyr.tidyverse.org/index.html)
+
+![](images/R.png){.absolute top="-18" left="250" width="5.5cm"}
+
+::: {style="font-size: 26px;"}
+| [**`dplyr`**](http://dplyr.tidyverse.org/)                                    | [**`merge`**](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/merge) | **Description**                                                                                                                                                                                                                         |
+|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**`full_join()`**](https://dplyr.tidyverse.org/reference/mutate-joins.html)  | **`merge(..., all = TRUE)`**                                                            | This performs a full outer join, combining all rows from both datasets. When there's no match in one dataset, **`NA`** values are introduced in the resulting dataset.                                                                  |
+| [**`inner_join()`**](https://dplyr.tidyverse.org/reference/mutate-joins.html) | **`merge(..., all = FALSE)`**                                                           | This conducts an inner join, returning only the rows with matching values in both datasets. Rows without a corresponding match in either dataset are excluded.                                                                          |
+| [**`left_join()`**](https://dplyr.tidyverse.org/reference/mutate-joins.html)  | **`merge(..., all.x = TRUE)`**                                                          | This performs a left outer join, retaining all rows from the first dataset and matching rows from the second dataset. **`NA`** values are filled in where the second dataset has no match.                                              |
+| [**`right_join()`**](https://dplyr.tidyverse.org/reference/mutate-joins.html) | **`merge(..., all.y = TRUE)`**                                                          | This executes a right outer join, keeping all rows from the second dataset and matching rows from the first dataset. Rows in the second dataset without a match in the first dataset are filled with **`NA`** in the resulting dataset. |
+:::
+
+::: {style="text-align: center;"}
+# [`tidyr`](https://tidyr.tidyverse.org/)
+
+![](images/tidyr-logo.png){width="1cm"}
+:::
+
+## [`tidyr`](https://tidyr.tidyverse.org/)
+
+![](images/tidyr-logo.png){.absolute top="-20" left="250" width="2cm"}
+
+::: {style="font-size: 22px;"}
+[`tidyr`](https://tidyr.tidyverse.org/) is a handy package when it comes to data processing and manipulation, allowing transforming messy data into a structured, tidy format product.
+
+-   **Key Solutions**:
+
+    -   **Handling Messy Data**: Streamlines the process of cleaning and organizing data, making it compatible with other Tidyverse packages.
+
+    -   **Data Transformation**: Provides tools for converting between wide and long formats, handling missing values, and separating or uniting columns.
+
+-   **Some relevant [`tidyr`](https://tidyr.tidyverse.org/) functions**:
+
+    -   [**`pivot_longer()`**](https://tidyr.tidyverse.org/reference/pivot_longer.html): Transforms data from wide to long format, making it easier to analyze with other Tidyverse tools.
+
+    -   [**`pivot_wider()`**](https://tidyr.tidyverse.org/reference/pivot_wider.html): Converts data from long to wide format, useful for creating human-readable tables.
+
+    -   [**`separate_wider_delim()`**](https://tidyr.tidyverse.org/reference/separate_wider_delim.html): Splits a single column into multiple columns, ideal for unpacking complex fields.
+
+    -   [**`unite()`**](https://tidyr.tidyverse.org/reference/unite.html): Combines multiple columns into a single column, simplifying datasets with redundant columns.
+
+    -   [**`drop_na()`**](https://tidyr.tidyverse.org/reference/drop_na.html): Removes rows with missing values, streamlining datasets for analysis.
+
+    -   [**`replace_na()`**](https://tidyr.tidyverse.org/reference/replace_na.html): Substitutes NA values with specified replacements, maintaining data integrity.
+
+*\*Note that other functions from [`tidyr`](http://tidyr.tidyverse.org/) might be more relevant depending on our specific needs.*
+:::
+
+## [`tidyr`](https://tidyr.tidyverse.org/)
+
+![](images/tidyr-logo.png){.absolute top="-20" left="250" width="2cm"}
+
+::: {style="font-size: 18px;"}
+#### Transform storms dataset into a wider format using [`pivot_wider()`](https://tidyr.tidyverse.org/reference/pivot_wider.html).
+
+```{r}
+#| echo: true
+
+library(tidyverse)
+storms_wider <- storms %>%
+  filter(year >= 2013) %>% 
+  select(year, status, wind) %>%
+  group_by(year, status) %>% 
+  summarise(max_wind_speed = max(wind), .groups = "drop") %>% 
+  pivot_wider(names_from = "status", values_from = "max_wind_speed")
+
+storms_wider
+```
+
+#### Transform the dataset into long format using [`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html).
+
+```{r}
+#| echo: true
+
+storms_wider %>%
+  pivot_longer(cols = disturbance:`tropical wave`, names_to = "status", values_to = "max_wind_speed") %>%
+  drop_na()
+
+```
+:::
+
+## [*`tidyr`*](https://tidyr.tidyverse.org/index.html)
+
+![](images/R.png){.absolute top="-18" left="250" width="5.5cm"}
+
+::: {style="font-size: 18px;"}
+It is possible to do the same thing using R packages outside the [`tidyverse`](http://www.tidyverse.org). However, as mentioned before, the code is not so straightforward and more **difficult to follow** (especially for beginners).
+
+```{r}
+#| echo: true
+
+library(tidyverse) # to get the storms dataset
+
+# Filter the dataset for years 2013 and onwards
+storms_filtered <- subset(storms, year >= 2013)
+
+# Select only the year, status, and wind columns
+storms_selected <- storms_filtered[, c("year", "status", "wind")]
+
+# Aggregate to find the maximum wind speed for each year and status combination
+storms_aggregated <- aggregate(wind ~ year + status, data = storms_selected, max)
+
+# Renaming the aggregated column
+names(storms_aggregated)[which(names(storms_aggregated) == "wind")] <- "max_wind_speed"
+
+# Reshape the data from long to wide format
+storms_wider <- reshape(storms_aggregated, timevar = "status", idvar = "year", direction = "wide")
+
+# Renaming the columns to match the column names as they are recorded in storms dataset
+colnames(storms_wider) <- gsub("max_wind_speed.", "", colnames(storms_wider))
+
+storms_wider # View the result
+
+```
+:::
+
+## [*`tidyr`*](https://tidyr.tidyverse.org/index.html)
+
+![](images/R.png){.absolute top="-18" left="250" width="5.5cm"}
+
+::: {style="font-size: 18px;"}
+It is possible to do the same thing using R packages outside the [`tidyverse`](http://www.tidyverse.org/). However, as mentioned before, the code is not so straightforward and more **difficult to follow** (especially for beginners).
+
+```{r}
+#| echo: true
+
+library(reshape2)
+# Reshape from wide to long format using melt
+storms_longer <- melt(storms_wider, id.vars = "year", 
+                      measure.vars = names(storms_wider)[names(storms_wider) != "year"],
+                      variable.name = "status", value.name = "max_wind_speed")
+
+# Drop rows with NA in 'max_wind_speed'
+storms_longer <- storms_longer[!is.na(storms_longer$max_wind_speed), ]
+
+# Modify the 'status' column to remove the prefix and keep only the text after the dot
+storms_longer$status <- sub(".*\\.", "", storms_longer$status)
+
+# Order the rows by 'year'
+storms_longer <- storms_longer[order(storms_longer$year), ]
+
+storms_longer[1:10, ] # View the result of the first 10 rows
+
+
+```
+:::
+
+## [`tidyr`](https://tidyr.tidyverse.org/)
+
+![](images/tidyr-logo.png){.absolute top="-20" left="250" width="2cm"}
+
+::: {style="font-size: 18px;"}
+#### Using [`unite()`](https://tidyr.tidyverse.org/reference/unite.html) to combine year, month and day into a single column named *date*.
+
+```{r}
+#| echo: true
+
+library(tidyverse)
+storms %>%
+  unite("date", year, month, day, sep = "-")
+
+```
+
+#### Using [`separate_wider_delim()`](https://tidyr.tidyverse.org/reference/separate_wider_delim.html) to split the *date* column back into three columns.
+
+```{r}
+#| echo: true
+
+storms %>%
+  unite("date", year, month, day, sep = "-") %>% 
+  separate_wider_delim(cols = date, delim = "-", names = c("year", "month", "day")) %>% 
+  mutate(category = replace_na(category, 0)) %>% 
+  filter(category == 0)
+```
+:::
+
+## [*`tidyr`*](https://tidyr.tidyverse.org/index.html)
+
+![](images/R.png){.absolute top="-18" left="250" width="5.5cm"}
+
+::: {style="font-size: 18px;"}
+::: row
+::: {.column style="float: left; width: 48%;"}
+Replicating the functionalities of the [`unite()`](https://tidyr.tidyverse.org/reference/unite.html) function can be also done using [`base` R](https://www.r-project.org/) functions.
+
+```{r}
+#| echo: true
+
+library(tidyverse) # to load the storms dataset
+
+# Create 'date' column by concatenating 'year', 'month', and 'day'
+storms$date <- with(storms, paste(year, month, day, sep = "-"))
+
+# Remove the 'year', 'month', and 'day' columns
+storms <- storms[, !(names(storms) %in% c("year", "month", "day"))]
+
+# Reorder columns to place 'date' after 'name'
+cols_order <- c("name", "date", setdiff(names(storms), c("name", "date")))
+storms <- storms[, cols_order]
+
+storms[1:10, ] # viewing the first 10 rows of the data
+```
+:::
+
+::: {.column style="float: right; width: 48%;"}
+Replicating the functionalities of the function [`separate_wider_delim()`](https://tidyr.tidyverse.org/reference/separate_wider_delim.html) can be also done with [`base` R](https://www.r-project.org/) functions.
+
+```{r}
+#| echo: true
+
+rm(storms) #cleaning the modifications done previously in this object
+library(tidyverse) # to access the storms dataset 
+
+# Create 'date' column by concatenating 'year', 'month', and 'day'
+storms$date <- with(storms, paste(year, month, day, sep = "-"))
+
+# Split 'date' column into 'year', 'month', and 'day' columns
+date_parts <- do.call(rbind, strsplit(storms$date, "-"))
+storms$year <- date_parts[, 1]
+storms$month <- date_parts[, 2]
+storms$day <- date_parts[, 3]
+
+# Replace NA values in 'category' with 0
+storms$category[is.na(storms$category)] <- 0
+
+# Filter rows where 'category' is 0
+storms_filtered <- storms[storms$category == 0, ]
+
+storms_filtered[1:10, ] # View the result of the first 10 rows
+
+```
+:::
+:::
+:::
+
+## [`base` R](https://www.r-project.org/) Vs. [`tidyverse`](http://www.tidyverse.org/)
+
+::: {style="font-size: 26px;"}
+::: columns
+::: {.column width="50%"}
+### [`base` R](https://www.r-project.org/)
+
+-   **Syntax**: More traditional, can be less intuitive for beginners.
+-   **Data Handling**: Works well with base data structures like vectors, matrices, arrays, and data frames.
+-   **Data Manipulation**: Requires more lines of code for complex operations.
+-   **Package Ecosystem**: Functions spread across various packages.
+:::
+
+::: {.column width="50%"}
+### [`tidyverse`](http://www.tidyverse.org/)
+
+-   **Syntax**: Modern, more consistent, and often more readable.
+-   **Data Handling**: Centered around the [`tibble`](http://tibble.tidyverse.org/), a modern take on the data.frame.
+-   **Data Manipulation**: Simplified with [`dplyr`](http://dplyr.tidyverse.org/), enabling complex operations with fewer lines of code.
+-   **Package Ecosystem**: Integrated suite of packages designed to work together seamlessly.
+:::
+:::
+:::
+
+::: {style="text-align: center;"}
+# The remainder [`tidyverse`](http://www.tidyverse.org) core packages
+:::
+
+## The remainder [`tidyverse`](http://www.tidyverse.org) core packages
+
+::: {style="text-align: center;"}
+[![](images/ggplot2-logo.png){width="4cm"}](http://ggplot2.tidyverse.org/) [![](images/readr-logo.png){width="4cm"}](http://readr.tidyverse.org/) [![](images/purrr-logo.png){width="4cm"}](http://purrr.tidyverse.org/) [![](images/forcats-logo.png){width="4cm"}](http://forcats.tidyverse.org/)
+:::
+
+Bear in mind that they are as **useful and powerful** as the 3 packages ([`tibble`](http://tibble.tidyverse.org/), [`dplyr`](http://dplyr.tidyverse.org/) and [`tidyr`](http://tidyr.tidyverse.org/)) covered in this lecture. Mastering them can be very advantageous to **work more efficiently** with [`tidyverse`](http://www.tidyverse.org/) suit of packages and empower us to **create more useful, tidy and clear workflows**.
+
+## The remainder [`tidyverse`](http://www.tidyverse.org) core packages
+
+::: {style="text-align: center;"}
+[![](images/ggplot2-logo.png){width="4cm"}](http://ggplot2.tidyverse.org/) [![](images/readr-logo.png){width="4cm"}](http://readr.tidyverse.org/) [![](images/purrr-logo.png){width="4cm"}](http://purrr.tidyverse.org/) [![](images/forcats-logo.png){width="4cm"}](http://forcats.tidyverse.org/)
+:::
+
+It is important to highlight that the same syntax applies for the remainder [`tidyverse`](http://www.tidyverse.org/) core packages. So it is possible, and **recommended**, to build **modular codes**, it can even be done for plotting ([`ggplot2`](http://ggplot2.tidyverse.org/)).
+
+## The remainder [`tidyverse`](http://www.tidyverse.org) core packages
+
+::: {style="font-size: 20px;"}
+-   A very quick example on plugging-in processing and plotting data
+
+```{r}
+#| echo: true
+#| fig.width: 5
+#| fig.height: 2.75
+
+library(tidyverse)
+
+# Load the tidyverse package for data manipulation and plotting
+library(tidyverse)
+
+storms %>% 
+  filter(year > 2009) %>%  # Filter the data to include only years greater than 2009
+  group_by(year) %>% # Group the filtered data by 'year'
+  summarise(mean_wind_speed = mean(wind, na.rm = T)) %>% # Calculate the mean wind speed for each year, ignoring NA values
+  ggplot(aes(x = year, y = mean_wind_speed)) + # Initialize a ggplot object, mapping 'year' to x-axis and 'mean_wind_speed' to y-axis
+  geom_col(fill = "dodgerblue2", col = "black") + # Add a column plot (bar plot) to the ggplot object with specific color and border
+  coord_flip() + # Flip the coordinates to make the bars horizontal
+  labs(title = "Storms", x = "Year", y = "Average wind speed (Km/h)") + # Add a title and labels to the x-axis and y-axis
+  theme_bw() +  # Apply a black-and-white theme for a cleaner look
+  theme(text = element_text(size = 14)) # Customize the text size for all text elements in the plot
+
+
+```
+:::
+
+![](images/storm.png){.absolute bottom="10" right="90" height="5.25cm"}
+
+## Additional resources
+
+::: {style="font-size: 20px;"}
+### RStudio IDE cheat sheet
+
+-   [`RStudio IDE`](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf)
+
+### **Core packages cheat sheets**
+
+-   [`ggplot2`](https://rstudio.github.io/cheatsheets/data-visualization.pdf)
+
+-   [`dplyr`](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
+
+-   [`tidyr`](https://rstudio.github.io/cheatsheets/tidyr.pdf)
+
+-   [`readr`](https://rstudio.github.io/cheatsheets/data-import.pdf)
+
+-   [`purrr`](https://rstudio.github.io/cheatsheets/purrr.pdf)
+
+-   [`tibble`](https://rstudio.github.io/cheatsheets/tidyr.pdf)
+
+-   [`stringr`](https://rstudio.github.io/cheatsheets/strings.pdf)
+
+-   [`forcats`](https://rstudio.github.io/cheatsheets/factors.pdf)
+
+### **Additional Learning Resources**
+
+-   **Tidyverse Main Website**: [tidyverse](https://www.tidyverse.org/)
+
+-   **R for Data Science**: Online book by [Hadley Wickham et al. 2023](https://r4ds.hadley.nz/)
+
+-   **Posit YouTube Channel**: Video contents from the tidyverse developers in they [YouTube channel](https://www.youtube.com/@PositPBC).
+:::
