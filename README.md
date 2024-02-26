@@ -20,10 +20,11 @@ To use the materials in this repository, you will need to have R and RStudio ins
 
 This repository includes two primary files for the "Introduction to R tidyverse" lecture:
 
-  - File Name: LESSON_introduction-to-tidyverse_20240124_v0.1.0.qmd
+  - File name: [LESSON_introduction-to-tidyverse_20240124_v0.1.0.qmd](LESSON_introduction-to-tidyverse_20240124_v0.1.0.qmd)
     - To work with the .qmd file, you'll need to have Quarto and R installed on your computer. For instructions on installing and using Quarto, please refer to the official Quarto documentation.
 
-  - File Name: LESSON_introduction-to-tidyverse_20240124_v0.1.0.html
+  - File name: [LESSON_introduction-to-tidyverse_20240124_v0.1.0.html](LESSON_introduction-to-tidyverse_20240124_v0.1.0.html)
+
     - You can open the HTML file in any standard web browser to view the lecture. No additional software is required for viewing.
 
 ## License
